@@ -1,0 +1,80 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "library",
+    "collectionId": "10f384d6-4a6f-4e0c-ac72-f2d015a6761f",
+    "dateExported": "2024-10-26T15:55:36.079Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "8158b9a4-8a69-4a15-8144-ce0209cabff5",
+            "colId": "10f384d6-4a6f-4e0c-ac72-f2d015a6761f",
+            "containerId": "",
+            "name": "postUser",
+            "url": "users",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-10-26T15:07:20.231Z",
+            "modified": "2024-10-26T15:13:20.694Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Karsai Bence4\",\n  \"email\":\"karsaibence4@gmail.com\",\n  \"password\": \"password123\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "8c77d051-ab28-4631-875d-e6fab07da20d",
+            "colId": "10f384d6-4a6f-4e0c-ac72-f2d015a6761f",
+            "containerId": "",
+            "name": "putUser",
+            "url": "users/1?name=Botka Bianka&email=bianka@gmail.com&password=password123",
+            "method": "PUT",
+            "sortNum": 20000,
+            "created": "2024-10-26T15:40:14.864Z",
+            "modified": "2024-10-26T15:44:14.528Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "Botka Bianka",
+                    "isPath": false
+                },
+                {
+                    "name": "email",
+                    "value": "bianka@gmail.com",
+                    "isPath": false
+                },
+                {
+                    "name": "password",
+                    "value": "password123",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "a50b600f-dcbc-491c-a130-bd23f106a3e2",
+            "colId": "10f384d6-4a6f-4e0c-ac72-f2d015a6761f",
+            "containerId": "",
+            "name": "deleteUser",
+            "url": "users/15",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-10-26T15:50:56.312Z",
+            "modified": "2024-10-26T15:53:29.371Z",
+            "headers": []
+        }
+    ],
+    "settings": {
+        "headers": [
+            {
+                "name": "Accept",
+                "value": "application/json"
+            }
+        ],
+        "options": {
+            "baseUrl": "http://localhost:8000/api/"
+        }
+    },
+    "ref": "BH5_KNlTv9UKGAMn2QJrfg_zCZys7g2TOCpVKDUbHsiDcawrjhzD8fwfJ_ClpO_pgW55Nx_AkzNv8nDKvBsPdQ"
+}
