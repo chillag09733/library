@@ -25,6 +25,9 @@ Route::middleware(['auth:sanctum'])
         Route::get('/lending-count-with-me', [LendingController::class, 'lendingCountWithMe']);
         Route::get('/lending-count-with-me2', [LendingController::class, 'lendingCountWithMe2']);
         Route::get('/book-with-me', [LendingController::class, 'bookWithMe']);
+        
+        Route::patch('/bring-back/{copy_id}/{start}', [LendingController::class, 'bringBack']);
+       
         // Kijelentkezés útvonal
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
     });

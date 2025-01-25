@@ -144,4 +144,25 @@ class LendingController extends Controller
 
         return $records;
     }
+
+    //trigger
+    public function bringBack($copy_id, $start){
+        $user = Auth::user();
+      //  $record = LendingController::show($user->id, $copy_id, $start);
+        $record = $this->show($user->id, $copy_id, $start);
+        $record->end = date(now());
+        $record->save();
+        DB::table('copies')
+        ->where('copy_id', $copy_id)
+        ->update(['status' => 0]);
+    }
+
+    public function bringBack2($copy_id, $start){
+        $user = Auth::user();
+      //  $record = LendingController::show($user->id, $copy_id, $start);
+        $record = $this->show($user->id, $copy_id, $start);
+        $record->end = date(now());
+        $record->save();
+        DB::select('CALL toStore(?)' , [$copy_id]);
+    }
 }
