@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lending;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LendingController extends Controller
 {
@@ -75,6 +76,72 @@ class LendingController extends Controller
         //egyenlőségjel default, nem kell feltétlen beleírni
         ->where('start', '=', $date)
         ->get();
+        return $records;
+    }
+
+     //hány kölcsönzése van a bej-tt felh-nak?
+     public function lendingCount(){
+        //bej-tt felh-ó
+        $user = Auth::user();
+        $count = DB::table('lendings')
+        ->where("user_id", "=", $user->id)
+        ->count();
+
+        return $count;
+    }
+
+    //hány könyvkölcsönzése volt/van a bej-tt felh-nak?
+    public function lendingBookCount(){
+        //bej-tt felh-ó
+        $user = Auth::user();
+        $count = DB::table('lendings as l')
+        ->join('copies as c', 'l.copy_id', 'c.copy_id')
+        ->where("l.user_id", "=", $user->id)
+        ->distinct('book_id')
+        ->count();
+
+        return $count;
+    }
+
+    //Hány példány van nálam - nyers?
+    public function lendingCountWithMe(){
+        //bej-tt felh-ó
+        $user = Auth::user();
+        $count = DB::select("SELECT 
+            COUNT(*)
+            FROM lendings
+            WHERE end is null
+            and user_id = $user->id");
+        
+        return $count;
+    }
+
+
+    //Hány példány van nálam?
+    public function lendingCountWithMe2(){
+        //bej-tt felh-ó
+        $user = Auth::user();
+        $count = DB::table("lendings")
+        ->whereNull('end')
+        ->where("user_id" , $user->id)
+        ->count();
+        
+        return $count;
+    }
+
+    //Milyen könyvek vannak nálam? (szerző, cím, book_id)
+    public function bookWithMe(){
+        //bej-tt felh-ó
+        $user = Auth::user();
+        $records = DB::table('lendings as l')
+        //ha nincs select, akkor minden adattal visszatér
+        ->select('author', 'title')
+        ->join('copies as c', 'l.copy_id', 'c.copy_id')
+        ->join('books as b', 'c.book_id', 'b.book_id')
+        ->where("l.user_id", "=", $user->id)
+        ->whereNull('end')
+        ->get();
+
         return $records;
     }
 }
